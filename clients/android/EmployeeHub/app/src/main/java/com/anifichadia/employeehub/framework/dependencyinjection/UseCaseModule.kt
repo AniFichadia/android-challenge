@@ -1,6 +1,10 @@
 package com.anifichadia.employeehub.framework.dependencyinjection
 
+import com.anifichadia.employeehub.service.EmployeeHubService
+import com.anifichadia.employeehub.shared.usecase.RetrieveAllEmployeeDetailsUseCase
+import com.anifichadia.employeehub.shared.usecase.RetrieveAllEmployeeDetailsUseCaseImpl
 import dagger.Module
+import dagger.Provides
 
 /**
  * @author Aniruddh Fichadia
@@ -8,4 +12,8 @@ import dagger.Module
  */
 @Module
 class UseCaseModule {
+    @Provides
+    fun provideRetrieveAllEmployeeDetailsUseCase(
+        employeeHubService: EmployeeHubService
+    ): RetrieveAllEmployeeDetailsUseCase = RetrieveAllEmployeeDetailsUseCaseImpl(employeeHubService)
 }
