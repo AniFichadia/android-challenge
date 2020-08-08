@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">EmployeeHub</string>
+
+    <string name="loading">Loading</string>
+    <string name="reload">Reload</string>
+
+    <string name="employee_list_error">Error loading employee list</string>
+
+    <string name="format_employee_full_name">%1$s %2$s</string>
 </resources>

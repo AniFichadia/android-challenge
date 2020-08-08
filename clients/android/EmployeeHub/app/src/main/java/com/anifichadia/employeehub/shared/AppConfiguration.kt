@@ -7,8 +7,8 @@ import com.anifichadia.employeehub.service.ServiceConfiguration
  * @date 2020-08-08
  */
 data class AppConfiguration(
-    val debug: Boolean = false,
+    val debug: Boolean = true,
     val serviceConfiguration: ServiceConfiguration = ServiceConfiguration(
-        baseUrl = "http://127.0.0.1:5000/"
+        baseUrl = "http://localhost:5000/"
     )
 )
