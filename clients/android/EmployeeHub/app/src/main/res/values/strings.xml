@@ -5,9 +5,11 @@
     <string name="reload">Reload</string>
 
     <string name="employee_list_error">Error loading employee list</string>
+    <string name="employee_list_content_description_image">Employee image</string>
+    <string name="employee_list_format_content_description_gender">Gender: %1$s</string>
+    <string name="employee_list_format_content_description_birth_date">Birth Date: %1$s</string>
 
     <string name="format_employee_full_name">%1$s %2$s</string>
-
 
     <string name="employee_details_error">Error loading employee details</string>
 </resources>

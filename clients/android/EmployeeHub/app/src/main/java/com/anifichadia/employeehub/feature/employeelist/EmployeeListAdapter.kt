@@ -62,7 +62,15 @@ class EmployeeListAdapter(
                 employee.lastName
             )
             binding.listItemEmployeeTextGender.text = employee.gender
+            binding.listItemEmployeeTextGender.contentDescription = itemView.context.getString(
+                R.string.employee_list_format_content_description_gender,
+                employee.gender
+            )
             binding.listItemEmployeeBirthDate.text = employee.birthDate.toString()
+            binding.listItemEmployeeBirthDate.contentDescription = itemView.context.getString(
+                R.string.employee_list_format_content_description_birth_date,
+                employee.birthDate.toString()
+            )
         }
     }
 }
