@@ -19,6 +19,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".feature.employeedetails.EmployeeDetailsActivity" />
+
     </application>
 
 </manifest>
