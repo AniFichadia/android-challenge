@@ -10,6 +10,8 @@ import com.anifichadia.employeehub.service.domain.Employee
 import com.anifichadia.employeehub.shared.toBitmap
 import kotlin.properties.Delegates
 
+typealias ListItemClickListener = (Employee, Int) -> Unit
+
 /**
  * @author Aniruddh Fichadia
  * @date 2020-08-08
@@ -21,6 +23,8 @@ class EmployeeListAdapter(
     private val layoutInflater = LayoutInflater.from(context)
 
     var employeeList: List<Employee> by Delegates.observable(emptyList()) { _, _, _ -> notifyDataSetChanged() }
+
+    var listItemClickListener: ListItemClickListener? = null
 
 
     override fun getItemCount(): Int = employeeList.size
@@ -41,6 +45,10 @@ class EmployeeListAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(employee: Employee) {
+            itemView.setOnClickListener {
+                listItemClickListener?.invoke(employee, adapterPosition)
+            }
+
             // This could potentially be cached using an LRU cache
             val thumbnail = employee.imageThumbnail
             if (thumbnail != null) {

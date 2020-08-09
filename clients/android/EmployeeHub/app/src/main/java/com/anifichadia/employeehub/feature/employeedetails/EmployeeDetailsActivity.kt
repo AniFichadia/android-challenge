@@ -3,6 +3,7 @@ package com.anifichadia.employeehub.feature.employeedetails
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,9 @@ class EmployeeDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         binding = ActivityEmployeeDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -86,6 +90,18 @@ class EmployeeDetailsActivity : AppCompatActivity() {
 
 
         viewModel.loadEmployeeDetailsIfRequired()
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 

@@ -3,6 +3,7 @@ package com.anifichadia.employeehub.feature.employeelist
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.anifichadia.employeehub.service.domain.Employee
+import com.anifichadia.employeehub.shared.Event
 import com.anifichadia.employeehub.shared.usecase.RetrieveAllEmployeeDetailsUseCase
 import kotlinx.coroutines.launch
 
@@ -14,11 +15,14 @@ class EmployeeListViewModel(
     private val retrieveAllEmployeeDetailsUseCase: RetrieveAllEmployeeDetailsUseCase
 ) : EmployeeListContract.ViewModel() {
 
-    private val _loadingState = MutableLiveData<EmployeeListContract.LoadingState>()
+    internal val _loadingState = MutableLiveData<EmployeeListContract.LoadingState>()
     override val loadingState: LiveData<EmployeeListContract.LoadingState> = _loadingState
 
-    private val _employeeList = MutableLiveData<List<Employee>>()
+    internal val _employeeList = MutableLiveData<List<Employee>>()
     override val employeeList: LiveData<List<Employee>> = _employeeList
+
+    internal val _viewEmployeeDetails = MutableLiveData<Event<Employee>>()
+    override val viewEmployeeDetails: MutableLiveData<Event<Employee>> = _viewEmployeeDetails
 
 
     override fun loadEmployeeListIfRequired() {
@@ -39,5 +43,9 @@ class EmployeeListViewModel(
                 }
             }
         }
+    }
+
+    override fun onUserSelectedEmployee(employee: Employee) {
+        _viewEmployeeDetails.postValue(Event(employee))
     }
 }

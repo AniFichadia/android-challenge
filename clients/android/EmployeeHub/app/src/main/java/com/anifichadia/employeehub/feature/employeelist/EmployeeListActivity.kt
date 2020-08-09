@@ -4,15 +4,19 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anifichadia.employeehub.EmployeeHubApplication
 import com.anifichadia.employeehub.databinding.ActivityEmployeeListBinding
+import com.anifichadia.employeehub.feature.employeedetails.EmployeeDetailsActivity
 import com.anifichadia.employeehub.feature.employeelist._di.DaggerEmployeeListComponent
 import com.anifichadia.employeehub.feature.employeelist._di.EmployeeListComponent
 import com.anifichadia.employeehub.feature.employeelist._di.EmployeeListModule
 import com.anifichadia.employeehub.framework.ViewModelInitialiser
 import com.anifichadia.employeehub.framework.dependencyinjection.UseCaseModule
+import com.anifichadia.employeehub.shared.Event
+import com.anifichadia.employeehub.shared.observeEvent
 
 /**
  * @author Aniruddh Fichadia
@@ -47,6 +51,10 @@ class EmployeeListActivity : AppCompatActivity() {
         val adapter = EmployeeListAdapter(this)
         binding.employeeListRecyclerviewEmployees.layoutManager = LinearLayoutManager(this)
         binding.employeeListRecyclerviewEmployees.adapter = adapter
+
+        adapter.listItemClickListener = { employee, _ ->
+            viewModel.onUserSelectedEmployee(employee)
+        }
         //endregion
 
         //region View model observer bindings
@@ -73,6 +81,10 @@ class EmployeeListActivity : AppCompatActivity() {
 
         viewModel.employeeList.observe(this) { employeeList ->
             adapter.employeeList = employeeList
+        }
+
+        viewModel.viewEmployeeDetails.observeEvent(this){ employee ->
+            startActivity(EmployeeDetailsActivity.newInstance(this, employee.id))
         }
         //endregion
 

@@ -1,5 +1,7 @@
 package com.anifichadia.employeehub.shared
 
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer as AndroidXObserver
 
 /**
@@ -24,4 +26,9 @@ class Event<DataT>(
             event?.consume()?.let { data -> handler(data) }
         }
     }
+}
+
+
+fun <DataT> MutableLiveData<Event<DataT>>.observeEvent(owner: LifecycleOwner, handler: (DataT) -> Unit) {
+    observe(owner, Event.Observer(handler))
 }
